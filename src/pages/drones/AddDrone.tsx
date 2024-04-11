@@ -33,9 +33,10 @@ const droneSchema = z.object({
       message: "Range must be a positive number",
     }),
   image: z
-    .instanceof(File)
-    .refine((val) => val instanceof File && val.size > 0, {
-      message: "Drone image is required",
+    .string()
+    .min(1, { message: "Drone image is required" })
+    .refine((val) => /^data:image\/[a-z]+;base64,/.test(val), {
+      message: "Invalid image format. Image must be a Base64 encoded string.",
     }),
   cameras: z.array(cameraSchema).refine((cameras) => cameras.length > 0, {
     message: "At least one camera is required",
@@ -91,10 +92,19 @@ const AddDrone = () => {
   const onImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
-      setImagePreview(URL.createObjectURL(file));
-      setValue("image", file);
+
+      const reader = new FileReader();
+
+      reader.onloadend = () => {
+        const base64String = reader.result as string;
+        setImagePreview(base64String);
+        setValue("image", base64String);
+      };
+
+      reader.readAsDataURL(file);
     } else {
       setImagePreview(null);
+      setValue("image", "");
     }
   };
 

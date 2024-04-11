@@ -10,7 +10,7 @@ export type Drone = {
   drone_code: string;
   name: string;
   range: number;
-  image?: File | undefined;
+  image?: string;
   release_date: string;
   cameras: Camera[];
 };
