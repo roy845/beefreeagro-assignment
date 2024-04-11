@@ -3,7 +3,7 @@ type HeaderProps = {
   sm?: boolean;
 };
 
-const Header = ({ title, sm }: HeaderProps) => {
+const Header = ({ title, sm }: HeaderProps): JSX.Element => {
   return (
     <header
       className={`${sm ? "text-3xl" : "text-6xl"} font-bold p-4 text-center`}

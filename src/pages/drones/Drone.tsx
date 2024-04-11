@@ -2,21 +2,26 @@ import { useParams } from "react-router-dom";
 import Spinner from "../../components/spinner/Spinner";
 import DroneComp from "../../components/drones/DroneComp";
 import useFetchDrone from "../../hooks/useFetchDrone";
+import DroneNotFound from "./DroneNotFound";
 
 type RouteParams = {
   droneCode: string;
 };
 
-const Drone = () => {
+const Drone = (): JSX.Element => {
   const { droneCode } = useParams<RouteParams>();
 
-  const { drone, status, error } = useFetchDrone(droneCode as string);
+  const { drone, status, errorDrone } = useFetchDrone(droneCode as string);
+
+  if (!drone) {
+    return <DroneNotFound />;
+  }
 
   if (status === "loading") {
     return <Spinner />;
   }
 
-  if (error) {
+  if (errorDrone) {
     return <DroneComp drone={drone} />;
   }
 

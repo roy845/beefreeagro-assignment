@@ -6,7 +6,10 @@ interface SpinnerProps {
   color?: string;
 }
 
-const Spinner: React.FC<SpinnerProps> = ({ size = 50, color = "blue" }) => {
+const Spinner: React.FC<SpinnerProps> = ({
+  size = 50,
+  color = "blue",
+}): JSX.Element => {
   return (
     <div className="flex justify-center items-center h-screen">
       <TailSpin height={size} width={size} color={color} ariaLabel="loading" />

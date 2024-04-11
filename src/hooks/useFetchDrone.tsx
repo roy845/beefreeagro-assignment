@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { fetchDrone, fetchDroneFromState } from "../features/drone/droneSlice";
 
 const useFetchDrone = (droneCode: string) => {
-  const { drone, status, error } = useAppSelector((state) => state.drone);
+  const { drone, status, errorDrone } = useAppSelector((state) => state.drone);
 
   const dispatch = useAppDispatch();
 
@@ -15,7 +15,7 @@ const useFetchDrone = (droneCode: string) => {
   return {
     drone,
     status,
-    error,
+    errorDrone,
   };
 };
 

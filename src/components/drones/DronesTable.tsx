@@ -1,15 +1,15 @@
-import { useNavigate } from "react-router-dom";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 import { Drone } from "../../types/droneTypes";
 import { formatDate } from "../../utils/formatDate";
 
-type DronesTable = {
+type DronesTableProps = {
   drones: Drone[];
 };
 
-const DronesTable = ({ drones }: DronesTable) => {
-  const navigate = useNavigate();
+const DronesTable = ({ drones }: DronesTableProps) => {
+  const navigate: NavigateFunction = useNavigate();
 
-  const navigateToDronePage = (droneCode: string) => {
+  const navigateToDronePage = (droneCode: string): void => {
     navigate(`/drone/${droneCode}`);
   };
 

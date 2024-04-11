@@ -1,10 +1,10 @@
-import { useNavigate } from "react-router-dom";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 import Header from "../../components/header/Header";
 import { MdFileUpload } from "react-icons/md";
 import useAddDroneForm from "../../hooks/useAddDroneForm";
 
-const AddDrone = () => {
-  const navigate = useNavigate();
+const AddDrone = (): JSX.Element => {
+  const navigate: NavigateFunction = useNavigate();
 
   const {
     register,

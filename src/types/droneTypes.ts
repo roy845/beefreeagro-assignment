@@ -1,10 +1,5 @@
-import { StatusType } from "./statusTypes";
-
-export type Camera = {
-  megapixels: number;
-  name: string;
-  type: string;
-};
+import { Camera } from "./cameraType";
+import { StatusType } from "./statusType";
 
 export type Drone = {
   drone_code: string;
@@ -19,6 +14,6 @@ export type DroneState = {
   drones: Drone[];
   drone: Drone;
   status: StatusType;
-  error: string;
+  errorDrone: string;
   errorDrones: string;
 };

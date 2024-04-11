@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { useNavigate } from "react-router-dom";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useAppDispatch } from "../app/hooks";
 import { DroneData } from "../types/droneDataType";
@@ -13,8 +13,9 @@ import { addDrone } from "../features/drone/droneSlice";
 const useAddDroneForm = () => {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-  const fileInputRef = useRef<HTMLInputElement>(null);
+  const navigate: NavigateFunction = useNavigate();
+  const fileInputRef: React.RefObject<HTMLInputElement> =
+    useRef<HTMLInputElement>(null);
 
   const formMethods = useForm<DroneData>({
     resolver: zodResolver(droneSchema),
@@ -56,10 +57,10 @@ const useAddDroneForm = () => {
     }
   };
 
-  const onImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const onImageChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     if (event.target.files && event.target.files[0]) {
-      const file = event.target.files[0];
-      const reader = new FileReader();
+      const file: File = event.target.files[0];
+      const reader: FileReader = new FileReader();
       reader.onloadend = () => {
         const base64String = reader.result as string;
         setImagePreview(base64String);
@@ -72,7 +73,7 @@ const useAddDroneForm = () => {
     }
   };
 
-  const onFileIconClick = () => {
+  const onFileIconClick = (): void => {
     fileInputRef.current?.click();
   };
 

@@ -1,16 +1,17 @@
+import { DRONES_URL } from "../../features/drone/dronesUrls";
 import { Drone } from "../../types/droneTypes";
 import Header from "../header/Header";
 import { NavigateFunction, useNavigate } from "react-router-dom";
 
-type DroneProps = {
+type DroneCompProps = {
   drone: Drone;
 };
 
-const DroneComp = ({ drone }: DroneProps) => {
+const DroneComp = ({ drone }: DroneCompProps): JSX.Element => {
   const navigate: NavigateFunction = useNavigate();
 
   return (
-    <div className="flex flex-col max-w-2xl mx-auto overflow-hidden shadow-lg my-2">
+    <div className="flex flex-col max-w-2xl mx-auto overflow-hidden shadow-lg my-2 border border-white">
       <Header sm title={`Drone - ${drone.drone_code}`} />
 
       <div className="flex flex-col md:flex-row">
@@ -42,7 +43,7 @@ const DroneComp = ({ drone }: DroneProps) => {
             />
           ) : (
             <img
-              src={`https://interviews-api.beefreeagro.com/api/v1/drones/${drone.drone_code}/image`}
+              src={`${DRONES_URL}${drone.drone_code}/image`}
               alt={`${drone.name}`}
               className="object-cover h-full w-full"
             />

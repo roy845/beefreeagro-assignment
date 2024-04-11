@@ -1,15 +1,15 @@
-import { useNavigate } from "react-router-dom";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 import Spinner from "../../components/spinner/Spinner";
 import Header from "../../components/header/Header";
 import Tooltip from "../../components/tooltip/tooltip";
 import DronesTable from "../../components/drones/DronesTable";
 import useFetchDrones from "../../hooks/useFetchDrones";
 
-const Drones = () => {
+const Drones = (): JSX.Element => {
   const { drones, errorDrones, status } = useFetchDrones();
-  const navigate = useNavigate();
+  const navigate: NavigateFunction = useNavigate();
 
-  const naviagteToAddDrone = () => {
+  const naviagteToAddDrone = (): void => {
     navigate("/newDrone");
   };
 
