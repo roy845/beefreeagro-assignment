@@ -1,129 +1,24 @@
-import { z } from "zod";
-import { useForm, useFieldArray } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useAppDispatch } from "../../app/hooks";
 import { useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
 import Header from "../../components/header/Header";
-import { addDrone } from "../../features/drone/droneSlice";
 import { MdFileUpload } from "react-icons/md";
-import { useRef, useState } from "react";
-import { Drone } from "../../types/droneTypes";
-
-const cameraSchema = z.object({
-  name: z.string().min(1, { message: "Camera name is required" }),
-  megapixels: z
-    .string()
-    .transform((val) => parseFloat(val))
-    .refine((val) => !isNaN(val) && val > 0, {
-      message: "Megapixels must be a positive number",
-    }),
-  type: z.string().min(1, { message: "Camera type is required" }),
-});
-
-const droneSchema = z.object({
-  drone_code: z
-    .string()
-    .min(3, { message: "Drone code has to be a minimum of 3 characters" }),
-  name: z.string().min(1, { message: "Drone name is required" }),
-  range: z
-    .string()
-    .transform((val) => parseFloat(val))
-    .refine((val) => !isNaN(val) && val > 0, {
-      message: "Range must be a positive number",
-    }),
-  release_date: z.preprocess(
-    (arg) => {
-      if (typeof arg === "string" || arg instanceof Date) {
-        return new Date(arg);
-      }
-    },
-    z.date({
-      required_error: "Release date is required",
-      invalid_type_error: "Invalid date format",
-    })
-  ),
-  image: z
-    .string()
-    .min(1, { message: "Drone image is required" })
-    .refine((val) => /^data:image\/[a-z]+;base64,/.test(val), {
-      message: "Invalid image format. Image must be a Base64 encoded string.",
-    }),
-  cameras: z.array(cameraSchema).refine((cameras) => cameras.length > 0, {
-    message: "At least one camera is required",
-  }),
-});
-
-type DroneData = z.infer<typeof droneSchema>;
+import useAddDroneForm from "../../hooks/useAddDroneForm";
 
 const AddDrone = () => {
-  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const {
     register,
-    control,
     handleSubmit,
-    reset,
-    setValue,
-    formState: { errors },
-  } = useForm<DroneData>({
-    resolver: zodResolver(droneSchema),
-    defaultValues: {
-      drone_code: "",
-      name: "",
-      range: 0,
-      release_date: new Date(),
-      cameras: [],
-    },
-  });
-
-  const { fields, append, remove } = useFieldArray<DroneData>({
-    control,
-    name: "cameras",
-  });
-
-  const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-
-  const onSubmit = (data: DroneData): void => {
-    try {
-      const droneData: Drone = {
-        ...data,
-        release_date: data.release_date.toISOString(),
-      };
-      dispatch(addDrone(droneData));
-      reset();
-      navigate("/");
-      toast.success("Drone Added successfully", { position: "bottom-left" });
-    } catch (error: any) {
-      toast.error(error.message, { position: "bottom-left" });
-    }
-  };
-
-  const onImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files[0]) {
-      const file = event.target.files[0];
-
-      const reader = new FileReader();
-
-      reader.onloadend = () => {
-        const base64String = reader.result as string;
-        setImagePreview(base64String);
-        setValue("image", base64String);
-      };
-
-      reader.readAsDataURL(file);
-    } else {
-      setImagePreview(null);
-      setValue("image", "");
-    }
-  };
-
-  const fileInputRef = useRef<HTMLInputElement>(null);
-
-  const onFileIconClick = () => {
-    fileInputRef.current?.click();
-  };
+    errors,
+    fields,
+    append,
+    remove,
+    imagePreview,
+    onImageChange,
+    onFileIconClick,
+    fileInputRef,
+    onSubmit,
+  } = useAddDroneForm();
 
   return (
     <div className="flex flex-col justify-center items-center">

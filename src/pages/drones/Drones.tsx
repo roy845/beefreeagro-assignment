@@ -1,29 +1,17 @@
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../app/hooks";
-import { fetchDrones } from "../../features/drone/droneSlice";
 import Spinner from "../../components/spinner/Spinner";
 import Header from "../../components/header/Header";
 import Tooltip from "../../components/tooltip/tooltip";
 import DronesTable from "../../components/drones/DronesTable";
+import useFetchDrones from "../../hooks/useFetchDrones";
 
 const Drones = () => {
-  const { drones, status, errorDrones } = useAppSelector(
-    (state) => state.drone
-  );
-
-  const dispatch = useAppDispatch();
+  const { drones, errorDrones, status } = useFetchDrones();
   const navigate = useNavigate();
 
   const naviagteToAddDrone = () => {
     navigate("/newDrone");
   };
-
-  useEffect(() => {
-    if (drones.length === 0) {
-      dispatch(fetchDrones());
-    }
-  }, [dispatch]);
 
   if (status === "loading") {
     return <Spinner />;

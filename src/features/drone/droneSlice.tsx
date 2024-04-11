@@ -1,7 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { Drone, DroneState } from "../../types/droneTypes";
 import { fetchDroneHandler, fetchDronesHandler } from "./droneAPI";
-import { AddDroneAction } from "../../types/actions/droneActionTypes";
+import {
+  AddDroneAction,
+  FetchDroneFromState,
+} from "../../types/actions/droneActionTypes";
 
 const initialState: DroneState = {
   drones: [] as Drone[],
@@ -38,7 +41,7 @@ export const droneSlice = createSlice({
       }
     },
 
-    fetchDroneFromState: (state, action) => {
+    fetchDroneFromState: (state, action: FetchDroneFromState) => {
       state.drone = state.drones.filter(
         (drone) => drone.drone_code === action.payload
       )[0];

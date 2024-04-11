@@ -19,6 +19,6 @@ export const fetchDroneHandler = async (droneCode: string): Promise<Drone> => {
     );
     return response.data;
   } catch (error: any) {
-    throw new Error(error.response?.data?.message || "Failed to fetch drone");
+    throw new Error(error.response?.data?.message);
   }
 };
