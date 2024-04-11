@@ -35,7 +35,7 @@ export const droneSlice = createSlice({
       const index: number = state.drones.findIndex(
         (drone) => drone.drone_code === action.payload.drone_code
       );
-      if (index == -1) {
+      if (index === -1) {
         state.drones.push(action.payload);
       } else {
         throw Error("Drone Already exists");
