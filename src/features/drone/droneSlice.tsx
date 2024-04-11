@@ -10,7 +10,7 @@ const initialState: DroneState = {
   drones: [] as Drone[],
   drone: {} as Drone,
   status: "idle",
-  error: "",
+  errorDrone: "",
   errorDrones: "",
 };
 
@@ -71,7 +71,7 @@ export const droneSlice = createSlice({
       })
       .addCase(fetchDrone.rejected, (state, action) => {
         state.status = "failed";
-        state.error = action.error.message || "Something went wrong";
+        state.errorDrone = action.error.message || "Something went wrong";
       });
   },
 });

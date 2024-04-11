@@ -6,3 +6,7 @@ export const formatDate = (dateString: string): string => {
   };
   return new Intl.DateTimeFormat("en-US", options).format(new Date(dateString));
 };
+
+export const formatDateAsLocal = (date: Date): string => {
+  return date.toISOString();
+};

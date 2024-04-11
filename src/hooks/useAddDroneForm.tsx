@@ -1,19 +1,21 @@
 import { useState, useRef } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-
-import { NavigateFunction, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useAppDispatch } from "../app/hooks";
 import { DroneData } from "../types/droneDataType";
 import { droneSchema } from "../schemas/droneSchema";
 import { Drone } from "../types/droneTypes";
 import { addDrone } from "../features/drone/droneSlice";
+import { formatDateAsLocal } from "../utils/formatDate";
+import { HOME } from "../routes/routes";
+import useCustomNavigate from "./useCustomNavigate";
 
 const useAddDroneForm = () => {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const dispatch = useAppDispatch();
-  const navigate: NavigateFunction = useNavigate();
+
+  const navigateToHome = useCustomNavigate(HOME);
   const fileInputRef: React.RefObject<HTMLInputElement> =
     useRef<HTMLInputElement>(null);
 
@@ -46,11 +48,11 @@ const useAddDroneForm = () => {
     try {
       const droneData: Drone = {
         ...data,
-        release_date: data.release_date.toISOString(),
+        release_date: formatDateAsLocal(data.release_date),
       };
       dispatch(addDrone(droneData));
       reset();
-      navigate("/");
+      navigateToHome();
       toast.success("Drone Added successfully", { position: "bottom-left" });
     } catch (error: any) {
       toast.error(error.message, { position: "bottom-left" });
