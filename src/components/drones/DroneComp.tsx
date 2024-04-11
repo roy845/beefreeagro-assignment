@@ -9,8 +9,6 @@ type DroneProps = {
 const DroneComp = ({ drone }: DroneProps) => {
   const navigate: NavigateFunction = useNavigate();
 
-  console.log(drone);
-
   return (
     <div className="flex flex-col max-w-2xl mx-auto overflow-hidden shadow-lg my-2">
       <Header sm title={`Drone - ${drone.drone_code}`} />

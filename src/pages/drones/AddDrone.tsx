@@ -32,6 +32,17 @@ const droneSchema = z.object({
     .refine((val) => !isNaN(val) && val > 0, {
       message: "Range must be a positive number",
     }),
+  release_date: z.preprocess(
+    (arg) => {
+      if (typeof arg === "string" || arg instanceof Date) {
+        return new Date(arg);
+      }
+    },
+    z.date({
+      required_error: "Release date is required",
+      invalid_type_error: "Invalid date format",
+    })
+  ),
   image: z
     .string()
     .min(1, { message: "Drone image is required" })
@@ -61,6 +72,7 @@ const AddDrone = () => {
       drone_code: "",
       name: "",
       range: 0,
+      release_date: new Date(),
       cameras: [],
     },
   });
@@ -74,12 +86,11 @@ const AddDrone = () => {
   const navigate = useNavigate();
 
   const onSubmit = (data: DroneData): void => {
-    const droneData: Drone = {
-      ...data,
-      release_date: new Date().toISOString(),
-    };
-
     try {
+      const droneData: Drone = {
+        ...data,
+        release_date: data.release_date.toISOString(),
+      };
       dispatch(addDrone(droneData));
       reset();
       navigate("/");
@@ -176,6 +187,25 @@ const AddDrone = () => {
 
           {errors.range && (
             <p className="mt-2 text-sm text-red-600">{errors.range.message}</p>
+          )}
+        </div>
+
+        <div>
+          <label
+            htmlFor="release_date"
+            className="block text-sm font-medium text-white"
+          >
+            Release Date
+          </label>
+          <input
+            {...register("release_date")}
+            type="date"
+            className="mt-1 block w-full px-3 py-2 border border-white bg-[#0d0c26] text-white rounded-md text-sm shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+          />
+          {errors.release_date && (
+            <p className="mt-2 text-sm text-red-600">
+              {errors.release_date.message}
+            </p>
           )}
         </div>
 
