@@ -3,6 +3,7 @@ import Spinner from "../../components/spinner/Spinner";
 import DroneComp from "../../components/drones/DroneComp";
 import useFetchDrone from "../../hooks/useFetchDrone";
 import DroneNotFound from "./DroneNotFound";
+import DronesError from "../../components/drones/DronesError";
 
 type RouteParams = {
   droneCode: string;
@@ -22,7 +23,7 @@ const Drone = (): JSX.Element => {
   }
 
   if (errorDrone) {
-    return <DroneComp drone={drone} />;
+    return <DronesError errorDrones={errorDrone} />;
   }
 
   return <DroneComp drone={drone} />;

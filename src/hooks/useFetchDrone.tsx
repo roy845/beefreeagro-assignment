@@ -3,13 +3,18 @@ import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { fetchDrone, fetchDroneFromState } from "../features/drone/droneSlice";
 
 const useFetchDrone = (droneCode: string) => {
-  const { drone, status, errorDrone } = useAppSelector((state) => state.drone);
+  const { drone, status, errorDrone, source } = useAppSelector(
+    (state) => state.drone
+  );
 
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchDroneFromState(droneCode as string));
-    dispatch(fetchDrone(droneCode as string));
+    if (source === "api") {
+      dispatch(fetchDrone(droneCode as string));
+    } else {
+      dispatch(fetchDroneFromState(droneCode as string));
+    }
   }, [dispatch, droneCode]);
 
   return {

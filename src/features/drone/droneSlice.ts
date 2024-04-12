@@ -5,12 +5,14 @@ import { Drone, DroneState } from "../../types/droneTypes";
 import {
   AddDroneAction,
   FetchDroneFromState,
+  SetSourceAction,
 } from "../../types/actions/droneActionTypes";
 
 const initialState: DroneState = {
   drones: [] as Drone[],
   drone: {} as Drone,
   status: "idle",
+  source: "",
   errorDrone: "",
   errorDrones: "",
 };
@@ -36,7 +38,7 @@ export const droneSlice = createSlice({
         (drone) => drone.drone_code === action.payload.drone_code
       );
       if (index === -1) {
-        state.drones.push(action.payload);
+        state.drones.push({ ...action.payload, source: "state" });
       } else {
         throw Error("Drone Already exists");
       }
@@ -47,7 +49,11 @@ export const droneSlice = createSlice({
         (drone) => drone.drone_code === action.payload
       )[0];
     },
+    setSource: (state, action: SetSourceAction) => {
+      state.source = action.payload;
+    },
   },
+
   extraReducers: (builder) => {
     builder
       .addCase(fetchDrones.pending, (state) => {
@@ -55,7 +61,10 @@ export const droneSlice = createSlice({
       })
       .addCase(fetchDrones.fulfilled, (state, action) => {
         state.status = "idle";
-        state.drones = action.payload;
+        state.drones = action.payload.map((drone: Drone) => ({
+          ...drone,
+          source: "api",
+        }));
       })
       .addCase(fetchDrones.rejected, (state, action) => {
         state.status = "failed";
@@ -77,6 +86,6 @@ export const droneSlice = createSlice({
   },
 });
 
-export const { addDrone, fetchDroneFromState } = droneSlice.actions;
+export const { addDrone, setSource, fetchDroneFromState } = droneSlice.actions;
 
 export default droneSlice.reducer;

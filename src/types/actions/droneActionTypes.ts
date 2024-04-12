@@ -1,3 +1,4 @@
+import { SourceType } from "../SourceType";
 import { Drone } from "../droneTypes";
 
 export type AddDroneAction = {
@@ -8,4 +9,9 @@ export type AddDroneAction = {
 export type FetchDroneFromState = {
   type: string;
   payload: string;
+};
+
+export type SetSourceAction = {
+  type: string;
+  payload: SourceType;
 };

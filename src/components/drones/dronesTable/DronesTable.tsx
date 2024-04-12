@@ -1,15 +1,15 @@
-import useNavigateToDrone from "../../../hooks/useNavigateToDrone";
 import { DronesWithoutCamerasAndImage } from "../../../types/droneTypes";
 import { formatDate } from "../../../utils/formatDate";
 import TableData from "./TableData";
 import TableHeader from "./TableHeader";
+import useDroneClickHandler from "../../../hooks/useDroneClickHandler";
 
 type DronesTableProps = {
   drones: DronesWithoutCamerasAndImage[];
 };
 
 const DronesTable = ({ drones }: DronesTableProps): JSX.Element => {
-  const navigateToDronePage = useNavigateToDrone();
+  const handleDroneClick = useDroneClickHandler();
 
   return (
     <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 border border-white">
@@ -25,7 +25,7 @@ const DronesTable = ({ drones }: DronesTableProps): JSX.Element => {
         {drones.map((drone: DronesWithoutCamerasAndImage) => (
           <tr
             key={drone.drone_code}
-            onClick={() => navigateToDronePage(drone.drone_code)}
+            onClick={() => handleDroneClick(drone)}
             className="bg-[#0d0c26] border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-300 hover:text-white cursor-pointer"
           >
             <TableData label={drone.drone_code} />

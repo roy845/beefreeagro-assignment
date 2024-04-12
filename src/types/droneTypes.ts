@@ -1,3 +1,4 @@
+import { SourceType } from "./SourceType";
 import { Camera } from "./cameraType";
 import { StatusType } from "./statusType";
 
@@ -8,6 +9,7 @@ export type Drone = {
   image?: string;
   release_date: string;
   cameras: Camera[];
+  source: SourceType;
 };
 
 export type DronesWithoutCamerasAndImage = Omit<Drone, "cameras" | "image">;
@@ -18,4 +20,5 @@ export type DroneState = {
   status: StatusType;
   errorDrone: string;
   errorDrones: string;
+  source: SourceType;
 };
