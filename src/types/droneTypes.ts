@@ -10,6 +10,8 @@ export type Drone = {
   cameras: Camera[];
 };
 
+export type DronesWithoutCamerasAndImage = Omit<Drone, "cameras" | "image">;
+
 export type DroneState = {
   drones: Drone[];
   drone: Drone;

@@ -1,11 +1,11 @@
 import useNavigateToDrone from "../../../hooks/useNavigateToDrone";
-import { Drone } from "../../../types/droneTypes";
+import { DronesWithoutCamerasAndImage } from "../../../types/droneTypes";
 import { formatDate } from "../../../utils/formatDate";
 import TableData from "./TableData";
 import TableHeader from "./TableHeader";
 
 type DronesTableProps = {
-  drones: Drone[];
+  drones: DronesWithoutCamerasAndImage[];
 };
 
 const DronesTable = ({ drones }: DronesTableProps): JSX.Element => {
@@ -22,7 +22,7 @@ const DronesTable = ({ drones }: DronesTableProps): JSX.Element => {
         </tr>
       </thead>
       <tbody>
-        {drones.map((drone: Drone) => (
+        {drones.map((drone: DronesWithoutCamerasAndImage) => (
           <tr
             key={drone.drone_code}
             onClick={() => navigateToDronePage(drone.drone_code)}
