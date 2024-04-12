@@ -1,5 +1,6 @@
 import React from "react";
 import { TailSpin } from "react-loader-spinner";
+import { SpinnerEnum } from "../../constants/spinnerConstants";
 
 interface SpinnerProps {
   size?: number;
@@ -7,8 +8,8 @@ interface SpinnerProps {
 }
 
 const Spinner: React.FC<SpinnerProps> = ({
-  size = 50,
-  color = "blue",
+  size = SpinnerEnum.SIZE,
+  color = SpinnerEnum.COLOR,
 }): JSX.Element => {
   return (
     <div className="flex justify-center items-center h-screen">

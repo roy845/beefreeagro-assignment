@@ -7,14 +7,18 @@ import {
   FetchDroneFromState,
   SetSourceAction,
 } from "../../types/actions/droneActionTypes";
+import { SourceEnum } from "../../types/SourceType";
+import { StatusEnum } from "../../types/statusType";
+import { ErrorEnum } from "../../constants/errorConstants";
+import { StringEnum } from "../../constants/stringConstants";
 
 const initialState: DroneState = {
   drones: [] as Drone[],
   drone: {} as Drone,
-  status: "idle",
-  source: "",
-  errorDrone: "",
-  errorDrones: "",
+  status: StatusEnum.IDLE,
+  source: SourceEnum.None,
+  errorDrone: StringEnum.EMPTY_STRING,
+  errorDrones: StringEnum.EMPTY_STRING,
 };
 
 export const fetchDrones = createAsyncThunk("drone/fetchDrones", async () => {
@@ -38,9 +42,9 @@ export const droneSlice = createSlice({
         (drone) => drone.drone_code === action.payload.drone_code
       );
       if (index === -1) {
-        state.drones.push({ ...action.payload, source: "state" });
+        state.drones.push(action.payload);
       } else {
-        throw Error("Drone Already exists");
+        throw Error(ErrorEnum.DRONE_ALREADY_EXISTS);
       }
     },
 
@@ -57,31 +61,31 @@ export const droneSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchDrones.pending, (state) => {
-        state.status = "loading";
+        state.status = StatusEnum.LOADING;
       })
       .addCase(fetchDrones.fulfilled, (state, action) => {
-        state.status = "idle";
+        state.status = StatusEnum.IDLE;
         state.drones = action.payload.map((drone: Drone) => ({
           ...drone,
-          source: "api",
+          source: SourceEnum.API,
         }));
       })
       .addCase(fetchDrones.rejected, (state, action) => {
-        state.status = "failed";
-        state.errorDrones = action.error.message || "Something went wrong";
+        state.status = StatusEnum.FAILED;
+        state.errorDrones = action.error.message || ErrorEnum.INTERNAL_ERROR;
       });
 
     builder
       .addCase(fetchDrone.pending, (state) => {
-        state.status = "loading";
+        state.status = StatusEnum.LOADING;
       })
       .addCase(fetchDrone.fulfilled, (state, action) => {
-        state.status = "idle";
+        state.status = StatusEnum.IDLE;
         state.drone = action.payload;
       })
       .addCase(fetchDrone.rejected, (state, action) => {
-        state.status = "failed";
-        state.errorDrone = action.error.message || "Something went wrong";
+        state.status = StatusEnum.FAILED;
+        state.errorDrone = action.error.message || ErrorEnum.INTERNAL_ERROR;
       });
   },
 });

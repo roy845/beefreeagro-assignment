@@ -4,6 +4,7 @@ import DroneComp from "../../components/drones/DroneComp";
 import useFetchDrone from "../../hooks/useFetchDrone";
 import DroneNotFound from "./DroneNotFound";
 import DronesError from "../../components/drones/DronesError";
+import { StatusEnum } from "../../types/statusType";
 
 type RouteParams = {
   droneCode: string;
@@ -18,7 +19,7 @@ const Drone = (): JSX.Element => {
     return <DroneNotFound />;
   }
 
-  if (status === "loading") {
+  if (status === StatusEnum.LOADING) {
     return <Spinner />;
   }
 

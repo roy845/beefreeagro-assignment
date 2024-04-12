@@ -12,7 +12,9 @@ export type Drone = {
   source: SourceType;
 };
 
-export type DronesWithoutCamerasAndImage = Omit<Drone, "cameras" | "image">;
+type CameraAndImage = "cameras" | "image";
+
+export type DronesWithoutCamerasAndImage = Omit<Drone, CameraAndImage>;
 
 export type DroneState = {
   drones: Drone[];

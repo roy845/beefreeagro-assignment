@@ -1,3 +1,4 @@
+import { ButtonEnum } from "../../../constants/buttonConstants";
 import { CameraType } from "../../../types/cameraType";
 import AddDroneFormErrors from "./AddDroneFormErrors";
 import AddDroneFormInput from "./AddDroneFormInput";
@@ -93,7 +94,7 @@ function DynamicCameraFields<TFieldValues extends FieldValues>({
             type="button"
             onClick={() => remove(index)}
           >
-            Remove
+            {ButtonEnum.REMOVE}
           </button>
         </div>
       ))}

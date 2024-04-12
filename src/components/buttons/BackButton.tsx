@@ -1,3 +1,4 @@
+import { ButtonEnum } from "../../constants/buttonConstants";
 import useGoBack from "../../hooks/useGoBack";
 
 const BackButton = () => {
@@ -8,7 +9,7 @@ const BackButton = () => {
         onClick={goBack}
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
       >
-        Back
+        {ButtonEnum.BACK}
       </button>
     </div>
   );

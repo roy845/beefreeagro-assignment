@@ -3,11 +3,12 @@ import DronesTable from "../../components/drones/dronesTable/DronesTable";
 import useFetchDrones from "../../hooks/useFetchDrones";
 import DronesHeading from "../../components/drones/DronesHeading";
 import DronesError from "../../components/drones/DronesError";
+import { StatusEnum } from "../../types/statusType";
 
 const Drones = (): JSX.Element => {
   const { drones, errorDrones, status } = useFetchDrones();
 
-  if (status === "loading") {
+  if (status === StatusEnum.LOADING) {
     return <Spinner />;
   }
 

@@ -4,7 +4,7 @@ import BackButton from "../../components/buttons/BackButton";
 const PageNotFound = (): JSX.Element => {
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
-      <MdErrorOutline className="text-6xl text-red-500" />{" "}
+      <MdErrorOutline className="text-6xl text-red-500" />
       <h1 className="text-2xl font-semibold text-gray-800 mt-4">
         Page Not Found
       </h1>

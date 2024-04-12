@@ -8,23 +8,26 @@ import { droneSchema } from "../schemas/droneSchema";
 import { Drone } from "../types/droneTypes";
 import { addDrone } from "../features/drone/droneSlice";
 import { formatDateAsLocal } from "../utils/formatDate";
-import { HOME } from "../routes/routes";
 import useCustomNavigate from "./useCustomNavigate";
 import { Camera } from "../types/cameraType";
+import { SourceEnum } from "../types/SourceType";
+import { SuccessEnum } from "../constants/successConstants";
+import { RoutesEnum } from "../routes/routes";
+import { StringEnum } from "../constants/stringConstants";
 
 const useAddDroneForm = () => {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const dispatch = useAppDispatch();
 
-  const navigateToHome = useCustomNavigate(HOME);
+  const navigateToHome = useCustomNavigate(RoutesEnum.HOME);
   const fileInputRef: React.RefObject<HTMLInputElement> =
     useRef<HTMLInputElement>(null);
 
   const formMethods = useForm<DroneData>({
     resolver: zodResolver(droneSchema),
     defaultValues: {
-      drone_code: "",
-      name: "",
+      drone_code: StringEnum.EMPTY_STRING,
+      name: StringEnum.EMPTY_STRING,
       range: 0,
       release_date: new Date(),
       cameras: [] as Camera[],
@@ -50,11 +53,14 @@ const useAddDroneForm = () => {
       const droneData: Drone = {
         ...data,
         release_date: formatDateAsLocal(data.release_date),
+        source: SourceEnum.State,
       };
       dispatch(addDrone(droneData));
       reset();
       navigateToHome();
-      toast.success("Drone Added successfully", { position: "bottom-left" });
+      toast.success(SuccessEnum.DRONE_ADDED_SUCCESS, {
+        position: "bottom-left",
+      });
     } catch (error: any) {
       toast.error(error.message, { position: "bottom-left" });
     }

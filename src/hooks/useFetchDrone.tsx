@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { fetchDrone, fetchDroneFromState } from "../features/drone/droneSlice";
+import { SourceEnum } from "../types/SourceType";
 
 const useFetchDrone = (droneCode: string) => {
   const { drone, status, errorDrone, source } = useAppSelector(
@@ -10,7 +11,7 @@ const useFetchDrone = (droneCode: string) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (source === "api") {
+    if (source === SourceEnum.API) {
       dispatch(fetchDrone(droneCode as string));
     } else {
       dispatch(fetchDroneFromState(droneCode as string));
