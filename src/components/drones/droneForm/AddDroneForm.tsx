@@ -92,6 +92,10 @@ const AddDroneForm = (): JSX.Element => {
         onClick={() => append({ name: "", megapixels: 0, type: "Color" })}
       />
 
+       {errors.cameras && (
+        <AddDroneFormErrors message={errors.cameras.message} />
+      )}
+
       <div className="flex gap-4">
         <AddDroneFormLabel label={"Upload Image"} />
 
