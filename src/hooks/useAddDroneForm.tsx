@@ -10,6 +10,7 @@ import { addDrone } from "../features/drone/droneSlice";
 import { formatDateAsLocal } from "../utils/formatDate";
 import { HOME } from "../routes/routes";
 import useCustomNavigate from "./useCustomNavigate";
+import { Camera } from "../types/cameraType";
 
 const useAddDroneForm = () => {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
@@ -26,7 +27,7 @@ const useAddDroneForm = () => {
       name: "",
       range: 0,
       release_date: new Date(),
-      cameras: [],
+      cameras: [] as Camera[],
     },
   });
 

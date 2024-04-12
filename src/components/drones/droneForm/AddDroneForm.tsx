@@ -85,10 +85,11 @@ const AddDroneForm = (): JSX.Element => {
         fields={fields}
         register={register}
         remove={remove}
+        errors={errors}
       />
 
       <AddCameraButton
-        onClick={() => append({ name: "", megapixels: 0, type: "" })}
+        onClick={() => append({ name: "", megapixels: 0, type: "Color" })}
       />
 
       <div className="flex gap-4">
