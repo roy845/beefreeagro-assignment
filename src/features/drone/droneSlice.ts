@@ -14,7 +14,7 @@ import { StringEnum } from "../../constants/stringConstants";
 
 const initialState: DroneState = {
   drones: [] as Drone[],
-  drone: {} as Drone,
+  drone: {} as Drone | undefined,
   status: StatusEnum.IDLE,
   source: SourceEnum.None,
   errorDrone: StringEnum.EMPTY_STRING,
@@ -56,6 +56,9 @@ export const droneSlice = createSlice({
     setSource: (state, action: SetSourceAction) => {
       state.source = action.payload;
     },
+    setDroneUndefined: (state, _) => {
+      state.drone = undefined;
+    },
   },
 
   extraReducers: (builder) => {
@@ -90,6 +93,7 @@ export const droneSlice = createSlice({
   },
 });
 
-export const { addDrone, setSource, fetchDroneFromState } = droneSlice.actions;
+export const { addDrone, setSource, setDroneUndefined, fetchDroneFromState } =
+  droneSlice.actions;
 
 export default droneSlice.reducer;

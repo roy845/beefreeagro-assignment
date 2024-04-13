@@ -9,12 +9,14 @@ const useDroneClickHandler = () => {
   const navigateToDronePage = useNavigateToDrone();
 
   const handleDroneClick = (drone: DronesWithoutCamerasAndImage): void => {
+    const routeParam =
+      drone.source === SourceEnum.API ? SourceEnum.API : SourceEnum.State;
     if (drone.source === SourceEnum.API) {
       dispatch(setSource(SourceEnum.API));
     } else {
       dispatch(setSource(SourceEnum.State));
     }
-    navigateToDronePage(drone.drone_code);
+    navigateToDronePage(drone.drone_code, routeParam);
   };
 
   return handleDroneClick;

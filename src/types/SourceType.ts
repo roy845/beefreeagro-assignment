@@ -5,3 +5,5 @@ export enum SourceEnum {
   API = "api",
   State = "state",
 }
+
+export const SOURCE_PARAM = "source";

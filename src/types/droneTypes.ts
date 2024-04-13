@@ -18,7 +18,7 @@ export type DronesWithoutCamerasAndImage = Omit<Drone, CameraAndImage>;
 
 export type DroneState = {
   drones: Drone[];
-  drone: Drone;
+  drone: Drone | undefined;
   status: StatusType;
   errorDrone: string;
   errorDrones: string;
