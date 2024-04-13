@@ -38,7 +38,7 @@ function DynamicCameraFields<TFieldValues extends FieldValues>({
     <>
       {fields.map((field, index) => (
         <div key={field.id}>
-          <AddDroneFormLabel label={`Camera ${index + 1}`} />
+          <AddDroneFormLabel label={`Camera Name`} />
           <AddDroneFormInput
             register={register}
             fieldName={`${fieldName}.${index}.name` as Path<TFieldValues>}
@@ -55,7 +55,7 @@ function DynamicCameraFields<TFieldValues extends FieldValues>({
               )?.[index]?.name?.message as string | undefined
             }
           />
-
+          <AddDroneFormLabel label={"Megapixels"} />
           <AddDroneFormInput
             register={register}
             fieldName={`${fieldName}.${index}.megapixels` as Path<TFieldValues>}
@@ -72,7 +72,7 @@ function DynamicCameraFields<TFieldValues extends FieldValues>({
               )?.[index]?.megapixels?.message as string | undefined
             }
           />
-
+          <AddDroneFormLabel label={"Type"} />
           <AddDroneFormInput
             register={register}
             fieldName={`${fieldName}.${index}.type` as Path<TFieldValues>}
