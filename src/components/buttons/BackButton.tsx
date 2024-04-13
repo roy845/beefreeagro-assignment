@@ -1,7 +1,7 @@
 import { ButtonEnum } from "../../constants/buttonConstants";
 import useGoBack from "../../hooks/useGoBack";
 
-const BackButton = () => {
+const BackButton = (): JSX.Element => {
   const goBack = useGoBack();
   return (
     <div className="w-full px-6 py-4 text-center">

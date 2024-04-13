@@ -1,7 +1,7 @@
-import { useNavigate } from "react-router-dom";
+import { NavigateFunction, useNavigate } from "react-router-dom";
 
 const useCustomNavigate = (route: string) => {
-  const navigate = useNavigate();
+  const navigate: NavigateFunction = useNavigate();
 
   const customNavigate = (): void => {
     navigate(route);

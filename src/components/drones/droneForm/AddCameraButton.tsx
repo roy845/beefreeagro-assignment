@@ -4,7 +4,7 @@ interface AddCameraButtonProps {
   onClick?: () => void;
 }
 
-const AddCameraButton = ({ onClick }: AddCameraButtonProps) => {
+const AddCameraButton = ({ onClick }: AddCameraButtonProps): JSX.Element => {
   return (
     <button
       type="button"
