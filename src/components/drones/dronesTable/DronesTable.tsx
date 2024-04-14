@@ -14,7 +14,7 @@ const DronesTable = ({ drones }: DronesTableProps): JSX.Element => {
       </thead>
       <tbody>
         {drones.map((drone: DronesWithoutCamerasAndImage) => (
-          <DroneRow drone={drone} />
+          <DroneRow key={drone.drone_code} drone={drone} />
         ))}
       </tbody>
     </table>
