@@ -99,7 +99,9 @@ const useAddDroneForm = () => {
     fileInputRef.current?.click();
   };
 
-  const handleUpperCase = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleUpperCase = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void => {
     const { value } = event.target;
     setValue("drone_code", value.toUpperCase());
   };
