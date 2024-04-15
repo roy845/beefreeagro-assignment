@@ -1,9 +1,8 @@
-import { TableEnum } from "../../../constants/tableConstants";
 import TableHeader from "./TableHeader";
 
 type TableHeadersProps = {
   numOfHeaders: number;
-  labels: TableEnum[];
+  labels: string[];
 };
 
 const TableHeaders = ({

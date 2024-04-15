@@ -1,8 +1,8 @@
-type TableHeadProps = {
+type TableHeaderProps = {
   label: string;
 };
 
-const TableHeader = ({ label }: TableHeadProps): JSX.Element => {
+const TableHeader = ({ label }: TableHeaderProps): JSX.Element => {
   return (
     <th
       scope="col"
