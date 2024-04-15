@@ -10,7 +10,7 @@ const useFetchDrones = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    const fetchDronesHadndler = async () => {
+    const fetchDronesHadndler = async (): Promise<void> => {
       if (drones.length === 0) {
         await dispatch(fetchDrones());
       }
