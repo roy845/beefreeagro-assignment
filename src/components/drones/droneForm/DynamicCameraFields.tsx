@@ -36,7 +36,7 @@ function DynamicCameraFields<TFieldValues extends FieldValues>({
 }: DynamicCameraFieldsProps<TFieldValues>): JSX.Element {
   return (
     <>
-      {fields.map((field, index) => (
+      {fields.map((field: CameraField, index: number) => (
         <div key={field.id}>
           <AddDroneFormLabel label={`Camera Name`} />
           <AddDroneFormInput

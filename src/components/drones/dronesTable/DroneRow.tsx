@@ -7,12 +7,12 @@ type DroneRowProps = {
   drone: DronesWithoutCamerasAndImage;
 };
 
-const DroneRow = ({ drone }: DroneRowProps) => {
-  const handleDroneClick = useDroneClickHandler();
+const DroneRow = ({ drone }: DroneRowProps): JSX.Element => {
+  const handleDroneClick: (drone: DronesWithoutCamerasAndImage) => void =
+    useDroneClickHandler();
 
   return (
     <tr
-      key={drone.drone_code}
       onClick={() => handleDroneClick(drone)}
       className="bg-[#0d0c26] border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-300 hover:text-white cursor-pointer"
     >

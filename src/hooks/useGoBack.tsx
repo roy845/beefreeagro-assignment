@@ -1,6 +1,6 @@
 import { NavigateFunction, useNavigate } from "react-router-dom";
 
-const useGoBack = () => {
+const useGoBack = (): (() => void) => {
   const navigate: NavigateFunction = useNavigate();
 
   const goBack = (): void => {

@@ -1,8 +1,16 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../app/hooks";
 import { fetchDrones } from "../features/drone/droneSlice";
+import { Drone } from "../types/droneTypes";
+import { StatusType } from "../types/statusType";
 
-const useFetchDrones = () => {
+type UseFetchDronesReturnType = {
+  drones: Drone[];
+  status: StatusType;
+  errorDrones: string;
+};
+
+const useFetchDrones = (): UseFetchDronesReturnType => {
   const { drones, status, errorDrones } = useAppSelector(
     (state) => state.drone
   );

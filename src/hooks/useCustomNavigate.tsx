@@ -1,6 +1,6 @@
 import { NavigateFunction, useNavigate } from "react-router-dom";
 
-const useCustomNavigate = (route: string) => {
+const useCustomNavigate = (route: string): (() => void) => {
   const navigate: NavigateFunction = useNavigate();
 
   const customNavigate = (): void => {

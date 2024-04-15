@@ -4,9 +4,12 @@ import { setSource } from "../features/drone/droneSlice";
 import { DronesWithoutCamerasAndImage } from "../types/droneTypes";
 import { SourceEnum } from "../types/SourceType";
 
-const useDroneClickHandler = () => {
+const useDroneClickHandler = (): ((
+  drone: DronesWithoutCamerasAndImage
+) => void) => {
   const dispatch = useDispatch();
-  const navigateToDronePage = useNavigateToDrone();
+  const navigateToDronePage: (droneCode: string, source: string) => void =
+    useNavigateToDrone();
 
   const handleDroneClick = (drone: DronesWithoutCamerasAndImage): void => {
     const routeQueryParam: SourceEnum.API | SourceEnum.State =

@@ -2,7 +2,7 @@ import { ButtonEnum } from "../../../constants/buttonConstants";
 import useGoBack from "../../../hooks/useGoBack";
 
 const AddDroneFormButtons = (): JSX.Element => {
-  const goBack = useGoBack();
+  const goBack: () => void = useGoBack();
   return (
     <div className="flex justify-center gap-4">
       <button

@@ -7,8 +7,18 @@ import {
 } from "../features/drone/droneSlice";
 import { SOURCE_PARAM, SourceEnum } from "../types/SourceType";
 import { useSearchParams } from "react-router-dom";
+import { Drone } from "../types/droneTypes";
+import { StatusType } from "../types/statusType";
 
-const useFetchDrone = (droneCode: string) => {
+type UseFetchDroneReturnType = {
+  drone: Drone | undefined;
+  status: StatusType;
+  errorDrone: string;
+};
+
+const useFetchDrone: (droneCode: string) => UseFetchDroneReturnType = (
+  droneCode: string
+): UseFetchDroneReturnType => {
   const { drone, status, errorDrone, source } = useAppSelector(
     (state) => state.drone
   );

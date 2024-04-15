@@ -1,3 +1,4 @@
+import { Camera } from "../../types/cameraType";
 import { Drone } from "../../types/droneTypes";
 import DroneCamera from "./DroneCamera";
 import DroneImage from "./DroneImage";
@@ -20,7 +21,7 @@ const DroneDetails = ({ drone }: DroneDetailsProps): JSX.Element => {
         </p>
         <div className="pt-4">
           <span className="font-bold">Cameras:</span>
-          {drone?.cameras?.map((camera, index) => (
+          {drone?.cameras?.map((camera: Camera, index: number) => (
             <DroneCamera key={index} camera={camera} />
           ))}
         </div>

@@ -19,7 +19,7 @@ const useAddDroneForm = () => {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const dispatch = useAppDispatch();
 
-  const navigateToHome = useCustomNavigate(RoutesEnum.HOME);
+  const navigateToHome: () => void = useCustomNavigate(RoutesEnum.HOME);
   const fileInputRef: React.RefObject<HTMLInputElement> =
     useRef<HTMLInputElement>(null);
 
