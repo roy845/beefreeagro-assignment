@@ -10,9 +10,12 @@ const useFetchDrones = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (drones.length === 0) {
-      dispatch(fetchDrones());
-    }
+    const fetchDronesHadndler = async () => {
+      if (drones.length === 0) {
+        await dispatch(fetchDrones());
+      }
+    };
+    fetchDronesHadndler();
   }, [dispatch]);
 
   return {

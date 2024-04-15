@@ -92,7 +92,7 @@ const AddDroneForm = (): JSX.Element => {
         onClick={() => append({ name: "", megapixels: 0, type: "Color" })}
       />
 
-       {errors.cameras && (
+      {errors.cameras && (
         <AddDroneFormErrors message={errors.cameras.message} />
       )}
 

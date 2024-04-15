@@ -6,4 +6,4 @@ export enum SourceEnum {
   State = "state",
 }
 
-export const SOURCE_PARAM = "source";
+export const SOURCE_PARAM: string = "source";

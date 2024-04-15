@@ -14,21 +14,28 @@ const useFetchDrone = (droneCode: string) => {
   );
 
   let [searchParams, _] = useSearchParams();
-  const routeParamValue = searchParams.get(SOURCE_PARAM);
+  const routeQueryParamValue: string | null = searchParams.get(SOURCE_PARAM);
 
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (source === SourceEnum.API || routeParamValue === SourceEnum.API) {
-      dispatch(fetchDrone(droneCode as string));
-    } else if (
-      source === SourceEnum.State ||
-      routeParamValue === SourceEnum.State
-    ) {
-      dispatch(fetchDroneFromState(droneCode as string));
-    } else {
-      dispatch(setDroneUndefined(undefined));
-    }
+    const fetchDroneHandler = async (): Promise<void> => {
+      if (
+        source === SourceEnum.API ||
+        routeQueryParamValue === SourceEnum.API
+      ) {
+        await dispatch(fetchDrone(droneCode as string));
+      } else if (
+        source === SourceEnum.State ||
+        routeQueryParamValue === SourceEnum.State
+      ) {
+        dispatch(fetchDroneFromState(droneCode as string));
+      } else {
+        dispatch(setDroneUndefined(undefined));
+      }
+    };
+
+    fetchDroneHandler();
   }, [dispatch, droneCode]);
 
   return {

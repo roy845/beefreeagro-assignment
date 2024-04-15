@@ -66,14 +66,27 @@ const useAddDroneForm = () => {
     }
   };
 
+  const isImage = (base64String: string): boolean => {
+    const match: RegExpMatchArray | null = base64String.match(
+      /^data:([A-Za-z-+\/]+);base64,(.+)$/
+    );
+    if (match) {
+      const mimeType: string = match[1];
+      return mimeType.startsWith("image/");
+    }
+    return false;
+  };
+
   const onImageChange = (event: React.ChangeEvent<HTMLInputElement>): void => {
     if (event.target.files && event.target.files[0]) {
       const file: File = event.target.files[0];
       const reader: FileReader = new FileReader();
       reader.onloadend = () => {
-        const base64String = reader.result as string;
-        setImagePreview(base64String);
-        setValue("image", base64String);
+        const base64String: string = reader.result as string;
+        if (isImage(base64String)) {
+          setImagePreview(base64String);
+          setValue("image", base64String);
+        }
       };
       reader.readAsDataURL(file);
     } else {

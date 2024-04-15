@@ -14,6 +14,7 @@ const DroneImage = ({ drone }: DroneImageProps): JSX.Element => {
         }
         alt={`${drone.name}`}
         className="object-cover h-full w-full"
+        loading="lazy"
       />
     </div>
   );
