@@ -1,4 +1,7 @@
 import { ButtonEnum } from "../../../constants/buttonConstants";
+import { cameraOptions } from "../../../constants/cameraConstants";
+import { InputPlaceholderEnum } from "../../../constants/inputConstants";
+import { InputLabelEnum } from "../../../constants/labelConstants";
 import { CameraType } from "../../../types/cameraType";
 import AddDroneFormErrors from "./AddDroneFormErrors";
 import AddDroneFormInput from "./AddDroneFormInput";
@@ -38,11 +41,11 @@ function DynamicCameraFields<TFieldValues extends FieldValues>({
     <>
       {fields.map((field: CameraField, index: number) => (
         <div key={field.id}>
-          <AddDroneFormLabel label={`Camera Name`} />
+          <AddDroneFormLabel label={InputLabelEnum.CAMERA_NAME} />
           <AddDroneFormInput
             register={register}
             fieldName={`${fieldName}.${index}.name` as Path<TFieldValues>}
-            placeholder="Camera name"
+            placeholder={InputPlaceholderEnum.CAMERA_NAME}
             type="text"
           />
 
@@ -55,11 +58,11 @@ function DynamicCameraFields<TFieldValues extends FieldValues>({
               )?.[index]?.name?.message as string | undefined
             }
           />
-          <AddDroneFormLabel label={"Megapixels"} />
+          <AddDroneFormLabel label={InputLabelEnum.CAMERA_MEGAPIXELS} />
           <AddDroneFormInput
             register={register}
             fieldName={`${fieldName}.${index}.megapixels` as Path<TFieldValues>}
-            placeholder="Megapixels"
+            placeholder={InputPlaceholderEnum.CAMERA_MEGAPIXELS}
             type="number"
           />
 
@@ -72,12 +75,12 @@ function DynamicCameraFields<TFieldValues extends FieldValues>({
               )?.[index]?.megapixels?.message as string | undefined
             }
           />
-          <AddDroneFormLabel label={"Type"} />
+          <AddDroneFormLabel label={InputLabelEnum.CAMERA_TYPE} />
           <AddDroneFormInput
             register={register}
             fieldName={`${fieldName}.${index}.type` as Path<TFieldValues>}
-            placeholder="Camera type"
-            type="text"
+            placeholder={InputPlaceholderEnum.CAMERA_TYPE}
+            options={cameraOptions}
           />
 
           <AddDroneFormErrors

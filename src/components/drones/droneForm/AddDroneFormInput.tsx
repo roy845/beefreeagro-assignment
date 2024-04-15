@@ -6,6 +6,8 @@ interface InputProps<TFieldValues extends FieldValues> {
   fieldName: FieldPath<TFieldValues>;
   placeholder?: string;
   type?: React.HTMLInputTypeAttribute;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  options?: Array<{ label: string; value: string }>;
   className?: string;
 }
 
@@ -14,14 +16,35 @@ function AddDroneFormInput<TFieldValues extends FieldValues>({
   fieldName,
   placeholder,
   type,
-  className = "mt-1 block w-full px-3 py-2 border border-white bg-[#0d0c26] text-white rounded-md text-sm shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500",
+  options,
+  onChange,
+  className = "mt-1 block w-full px-3 py-2 border border-white bg-[#0d0c26] text-white rounded-md text-sm shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-left",
 }: InputProps<TFieldValues>): JSX.Element {
+  if (options) {
+    return (
+      <select
+        {...register(fieldName)}
+        className={`${className} cursor-pointer`}
+      >
+        <option disabled value="">
+          {placeholder}
+        </option>
+        {options.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
+    );
+  }
+
   return (
     <input
       {...register(fieldName)}
       type={type}
       placeholder={placeholder}
-      className={className}
+      className={type === "date" ? `${className} cursor-pointer` : className}
+      onChange={onChange}
     />
   );
 }

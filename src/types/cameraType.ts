@@ -5,3 +5,8 @@ export type Camera = {
   name: string;
   type: CameraType;
 };
+
+export type CameraOptions = {
+  label: string;
+  value: string;
+};

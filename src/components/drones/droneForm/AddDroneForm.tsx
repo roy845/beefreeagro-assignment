@@ -1,3 +1,5 @@
+import { InputPlaceholderEnum } from "../../../constants/inputConstants";
+import { InputLabelEnum } from "../../../constants/labelConstants";
 import useAddDroneForm from "../../../hooks/useAddDroneForm";
 import AddCameraButton from "./AddCameraButton";
 import AddDroneFormButtons from "./AddDroneFormButtons";
@@ -21,6 +23,7 @@ const AddDroneForm = (): JSX.Element => {
     onFileIconClick,
     fileInputRef,
     onSubmit,
+    handleUpperCase,
   } = useAddDroneForm();
 
   return (
@@ -29,12 +32,13 @@ const AddDroneForm = (): JSX.Element => {
       className="space-y-4 w-full max-w-md"
     >
       <div>
-        <AddDroneFormLabel label={"Drone Code"} />
+        <AddDroneFormLabel label={InputLabelEnum.DRONE_CODE} />
         <AddDroneFormInput
           register={register}
           fieldName="drone_code"
-          placeholder="Enter drone code"
+          placeholder={InputPlaceholderEnum.DRONE_CODE}
           type="text"
+          onChange={handleUpperCase}
         />
 
         {errors.drone_code && (
@@ -43,11 +47,11 @@ const AddDroneForm = (): JSX.Element => {
       </div>
 
       <div>
-        <AddDroneFormLabel label={"Name"} />
+        <AddDroneFormLabel label={InputLabelEnum.DRONE_NAME} />
         <AddDroneFormInput
           register={register}
           fieldName="name"
-          placeholder="Enter drone name"
+          placeholder={InputPlaceholderEnum.DRONE_NAME}
           type="text"
         />
 
@@ -55,11 +59,11 @@ const AddDroneForm = (): JSX.Element => {
       </div>
 
       <div>
-        <AddDroneFormLabel label={"Range"} />
+        <AddDroneFormLabel label={InputLabelEnum.DRONE_RANGE} />
         <AddDroneFormInput
           register={register}
           fieldName="range"
-          placeholder="Enter drone range"
+          placeholder={InputPlaceholderEnum.DRONE_RANGE}
           type="number"
         />
 
@@ -67,11 +71,11 @@ const AddDroneForm = (): JSX.Element => {
       </div>
 
       <div>
-        <AddDroneFormLabel label={"Release Date"} />
+        <AddDroneFormLabel label={InputLabelEnum.DRONE_RELEASE_DATE} />
         <AddDroneFormInput
           register={register}
           fieldName="release_date"
-          placeholder="Enter drone range"
+          placeholder={InputPlaceholderEnum.DRONE_RELEASE_DATE}
           type="date"
         />
 
