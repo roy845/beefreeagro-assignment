@@ -6,4 +6,5 @@ export enum InputLabelEnum {
   CAMERA_NAME = "Camera Name",
   CAMERA_MEGAPIXELS = "Camera Megapixels",
   CAMERA_TYPE = "Camera Type",
+  UPLOAD_IMAGE = "Upload Image",
 }

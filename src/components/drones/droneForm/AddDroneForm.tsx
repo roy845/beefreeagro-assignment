@@ -1,3 +1,4 @@
+import { CameraEnum } from "../../../constants/cameraConstants";
 import { InputPlaceholderEnum } from "../../../constants/inputConstants";
 import { InputLabelEnum } from "../../../constants/labelConstants";
 import useAddDroneForm from "../../../hooks/useAddDroneForm";
@@ -93,7 +94,9 @@ const AddDroneForm = (): JSX.Element => {
       />
 
       <AddCameraButton
-        onClick={() => append({ name: "", megapixels: 0, type: "Color" })}
+        onClick={() =>
+          append({ name: "", megapixels: 0, type: CameraEnum.Color })
+        }
       />
 
       {errors.cameras && (
@@ -101,7 +104,7 @@ const AddDroneForm = (): JSX.Element => {
       )}
 
       <div className="flex gap-4">
-        <AddDroneFormLabel label={"Upload Image"} />
+        <AddDroneFormLabel label={InputLabelEnum.UPLOAD_IMAGE} />
 
         <AddDroneFormImageUpload
           fileInputRef={fileInputRef}
