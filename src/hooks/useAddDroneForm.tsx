@@ -14,6 +14,8 @@ import { SourceEnum } from "../types/SourceType";
 import { SuccessEnum } from "../constants/successConstants";
 import { RoutesEnum } from "../routes/routes";
 import { StringEnum } from "../constants/stringConstants";
+import { ToastEnum } from "../constants/toastConstants";
+import { dataUrlPattern, imagePrefix } from "../constants/regex/regex";
 
 const useAddDroneForm = () => {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
@@ -59,20 +61,18 @@ const useAddDroneForm = () => {
       reset();
       navigateToHome();
       toast.success(SuccessEnum.DRONE_ADDED_SUCCESS, {
-        position: "bottom-left",
+        position: ToastEnum.BOTTOM_LEFT,
       });
     } catch (error: any) {
-      toast.error(error.message, { position: "bottom-left" });
+      toast.error(error.message, { position: ToastEnum.BOTTOM_LEFT });
     }
   };
 
   const isImage = (base64String: string): boolean => {
-    const match: RegExpMatchArray | null = base64String.match(
-      /^data:([A-Za-z-+\/]+);base64,(.+)$/
-    );
+    const match: RegExpMatchArray | null = base64String.match(dataUrlPattern);
     if (match) {
       const mimeType: string = match[1];
-      return mimeType.startsWith("image/");
+      return mimeType.startsWith(imagePrefix);
     }
     return false;
   };
@@ -91,7 +91,7 @@ const useAddDroneForm = () => {
       reader.readAsDataURL(file);
     } else {
       setImagePreview(null);
-      setValue("image", "");
+      setValue("image", StringEnum.EMPTY_STRING);
     }
   };
 

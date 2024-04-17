@@ -14,16 +14,12 @@ const Drone = (): JSX.Element => {
 
   const { drone, status, errorDrone } = useFetchDrone(droneCode as string);
 
-  if (!drone) {
+  if (!drone || errorDrone) {
     return <DroneNotFound />;
   }
 
   if (status === StatusEnum.LOADING) {
     return <Spinner />;
-  }
-
-  if (errorDrone) {
-    return <DroneNotFound />;
   }
 
   return <DroneComp drone={drone} />;

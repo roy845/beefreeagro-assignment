@@ -1,6 +1,7 @@
 import { CameraEnum } from "../../../constants/cameraConstants";
 import { InputPlaceholderEnum } from "../../../constants/inputConstants";
 import { InputLabelEnum } from "../../../constants/labelConstants";
+import { StringEnum } from "../../../constants/stringConstants";
 import useAddDroneForm from "../../../hooks/useAddDroneForm";
 import AddCameraButton from "./AddCameraButton";
 import AddDroneFormButtons from "./AddDroneFormButtons";
@@ -95,7 +96,11 @@ const AddDroneForm = (): JSX.Element => {
 
       <AddCameraButton
         onClick={() =>
-          append({ name: "", megapixels: 0, type: CameraEnum.Color })
+          append({
+            name: StringEnum.EMPTY_STRING,
+            megapixels: 0,
+            type: CameraEnum.Color,
+          })
         }
       />
 
