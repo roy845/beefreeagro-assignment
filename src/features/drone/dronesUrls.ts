@@ -1,1 +1,2 @@
-export const DRONES_URL = import.meta.env.VITE_DRONES_URL as string;
+export const DRONES_URL: string =
+  "https://interviews-api.beefreeagro.com/api/v1/drones/";
