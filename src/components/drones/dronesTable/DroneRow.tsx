@@ -14,7 +14,7 @@ const DroneRow = ({ drone }: DroneRowProps): JSX.Element => {
   return (
     <tr
       onClick={() => handleDroneClick(drone)}
-      className="bg-[#0d0c26] border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-300 hover:text-white cursor-pointer"
+      className="bg-[#0d0c26] border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-[#b319ab] hover:text-white cursor-pointer"
     >
       <TableData label={drone.drone_code} />
       <TableData label={drone.name} />
