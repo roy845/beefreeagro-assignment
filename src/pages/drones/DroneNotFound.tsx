@@ -1,11 +1,9 @@
 import { MdErrorOutline } from "react-icons/md";
 import BackButton from "../../components/buttons/BackButton";
 
-type DroneNotFoundProps = {
-  droneCode: string | undefined;
-};
 
-const DroneNotFound = ({ droneCode }: DroneNotFoundProps): JSX.Element => {
+
+const DroneNotFound = (): JSX.Element => {
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
       <MdErrorOutline className="text-6xl text-red-500" />

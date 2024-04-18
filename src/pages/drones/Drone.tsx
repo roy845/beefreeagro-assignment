@@ -15,7 +15,7 @@ const Drone = (): JSX.Element => {
   const { drone, status, errorDrone } = useFetchDrone(droneCode as string);
 
   if (!drone || errorDrone) {
-    return <DroneNotFound droneCode={droneCode} />;
+    return <DroneNotFound />;
   }
 
   if (status === StatusEnum.LOADING) {
