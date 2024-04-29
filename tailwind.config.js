@@ -7,9 +7,13 @@ export default {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-        "text-gradient": "linear-gradient(to right, #06b6d4, #3b82f6)",
+        "text-gradient": "linear-gradient(to right, #6886fe, #844de7)",
       },
     },
   },
   plugins: [],
 };
+
+//before
+// gradient start ---> #06b6d4
+// gradient stop ---> #3b82f6

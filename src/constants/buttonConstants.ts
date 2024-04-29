@@ -5,4 +5,5 @@ export enum ButtonEnum {
   CANCEL = "Cancel",
   REMOVE = "Remove",
   PLUS = "+",
+  REFRESH = "Refresh",
 }

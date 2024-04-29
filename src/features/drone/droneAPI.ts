@@ -9,7 +9,11 @@ export const fetchDronesHandler = async (): Promise<Drone[]> => {
 
     return response.data;
   } catch (error: any) {
-    throw new Error(error.response?.data?.detail || ErrorEnum.DRONES_ERROR);
+    if (error.message === ErrorEnum.NETWORK_ERROR) {
+      throw new Error(ErrorEnum.NETWORK_ERROR);
+    } else {
+      throw new Error(error.response?.data?.detail || ErrorEnum.DRONES_ERROR);
+    }
   }
 };
 
@@ -18,6 +22,10 @@ export const fetchDroneHandler = async (droneCode: string): Promise<Drone> => {
     const response = await axiosInstance.get<Drone>(`${droneCode}`);
     return response.data;
   } catch (error: any) {
-    throw new Error(error.response?.data?.detail || ErrorEnum.DRONE_ERROR);
+    if (error.message === ErrorEnum.NETWORK_ERROR) {
+      throw new Error(ErrorEnum.NETWORK_ERROR);
+    } else {
+      throw new Error(error.response?.data?.detail || ErrorEnum.DRONE_ERROR);
+    }
   }
 };

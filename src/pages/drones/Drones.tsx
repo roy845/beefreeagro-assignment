@@ -1,12 +1,25 @@
 import Spinner from "../../components/spinner/Spinner";
-import DronesTable from "../../components/drones/dronesTable/DronesTable";
 import useFetchDrones from "../../hooks/useFetchDrones";
-import DronesHeading from "../../components/drones/DronesHeading";
 import DronesError from "../../components/drones/DronesError";
 import { StatusEnum } from "../../types/statusType";
+import { ErrorEnum } from "../../constants/errorConstants";
+import NetworkError from "../notFound/NetworkError";
+import useDocumentTitle from "../../hooks/useDocumentTitle";
+import { DocumentTitleEnum } from "../../constants/documentTitleConstants";
+import DronesComp from "../../components/drones/DronesComp";
 
 const Drones = (): JSX.Element => {
   const { drones, errorDrones, status } = useFetchDrones();
+
+  if (errorDrones === ErrorEnum.NETWORK_ERROR) {
+    useDocumentTitle(DocumentTitleEnum.NETWORK_ERROR);
+  } else {
+    useDocumentTitle(DocumentTitleEnum.DRONES_PAGE);
+  }
+
+  if (errorDrones === ErrorEnum.NETWORK_ERROR) {
+    return <NetworkError />;
+  }
 
   if (status === StatusEnum.LOADING) {
     return <Spinner />;
@@ -16,14 +29,7 @@ const Drones = (): JSX.Element => {
     return <DronesError errorDrones={errorDrones} />;
   }
 
-  return (
-    <div className="flex flex-col items-center justify-center">
-      <DronesHeading />
-      <div className="max-w-4xl w-full overflow-x-auto relative shadow-md sm:rounded-lg">
-        <DronesTable drones={drones} />
-      </div>
-    </div>
-  );
+  return <DronesComp drones={drones} />;
 };
 
 export default Drones;

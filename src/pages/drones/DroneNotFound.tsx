@@ -1,7 +1,10 @@
 import { MdErrorOutline } from "react-icons/md";
 import BackButton from "../../components/buttons/BackButton";
+import useDocumentTitle from "../../hooks/useDocumentTitle";
+import { DocumentTitleEnum } from "../../constants/documentTitleConstants";
 
 const DroneNotFound = (): JSX.Element => {
+  useDocumentTitle(DocumentTitleEnum.DRONE_NOT_FOUND);
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
       <MdErrorOutline className="text-6xl text-red-500" />
